@@ -1,20 +1,31 @@
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions;
-
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import org.junit.jupiter.api.*;
 
 public class FirstTest {
 
     int result;
 
+    @BeforeAll
+    static void beforeAll( ) {
+        System.out.println("#### beforeAll( )\n " );
+    }
+
     @BeforeEach
     void beforeEach( ) {
-        System.out.println("####  beforeEach" );
+        System.out.println("####  beforeEach( )" );
         result = getResult();
     }
+
+    @AfterEach
+    void afterEach( ) {
+        System.out.println("####  afterEach( )\n" );
+        result = 0;
+    }
+
+    @AfterAll
+    static void afterAll( ) {
+        System.out.println("\n#### afterAll( )\n " );
+    }
+
 
     @Test
     void firstTest() {
