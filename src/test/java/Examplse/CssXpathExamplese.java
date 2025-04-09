@@ -1,6 +1,7 @@
-package tests;
+package Examplse;
 
 import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
@@ -30,7 +31,22 @@ public class CssXpathExamplese {
 
         // <input type="email" class="inputtext login_form_input_box">
         $("[class=inputext][calss=login_form_input_box ]").setValue("1");
+        $(" .login_form_input_box").setValue("1");
         $(".inputext.login_form_input_box").setValue("1");
+        $("input.inputext.login_form_input_box").setValue("1");
+        $x("//input[@class=inputext][@calss=login_form_input_box ]").setValue("1");
+
+        // <div class="inputtext">
+        //      <input type="email" class="login_form_input_box">
+        // </div>
+        $(".inputext. login_form_input_box").setValue("1");
+
+        // <div> Hello, qa.quru!</div> (Поиск по тексту, пример)
+        $(byText("Hello, qa.quru!"));
+        $(withText("llo, qa.quru"));
+        $x("//*[contains(text(), 'Hello, qa.quru!') )]");
+
+
 
     }
 
