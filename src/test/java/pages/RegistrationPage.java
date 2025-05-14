@@ -2,6 +2,8 @@ package pages;
 
 import com.codeborne.selenide.SelenideElement;
 import pages.components.CalendarComponent;
+import pages.components.CityComponent;
+import pages.components.StateComponent;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
@@ -13,18 +15,20 @@ public class RegistrationPage {
     private SelenideElement firstNameInput = $("#firstName"),
 
     lastNameInput = $("#lastName"),
-
     useEmailInput = $("#userEmail"),
-
     genterWrapper = $("#genterWrapper"),
-
     userNumberInput = $("#userNumber"),
-
-    calendarInput = $("#dateOfBirthInput");
-
-
+    calendarInput = $("#dateOfBirthInput"),
+    subjectsInput = $("#subjectsInput"),
+    hobbiesWrapperInput = $("#hobbiesWrapper"),
+    uploadPicture = $("#uploadPicture"),
+    currentAddressInput = $("#currentAddress"),
+    submitClick = $("#submit"),
+    outputTable= $(".table-responsive");
 
     CalendarComponent calendarComponent = new CalendarComponent();
+    StateComponent stateComponent = new StateComponent();
+    CityComponent cityComponent = new CityComponent();
 
 
 
@@ -33,6 +37,8 @@ public class RegistrationPage {
         open("/automation-practice-form");
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
         executeJavaScript("$('footer').remove()");
+
+        return this;
     }
 
 
@@ -79,9 +85,58 @@ public class RegistrationPage {
 
     }
 
+
+    public RegistrationPage setSubjects(String value){
+        subjectsInput.setValue(value).pressEnter();
+        return this;
+    }
+
+    public RegistrationPage setHobbies(String value){
+        hobbiesWrapperInput.$(byText(value)).click();
+        return this;
+    }
+
+    public RegistrationPage uploadPicture(String value){
+        uploadPicture.uploadFromClasspath(value);
+        return this;
+    }
+
+    public RegistrationPage setCurrentAddress(String value){
+        currentAddressInput.setValue(value);
+        return this;
+    }
+
+    public RegistrationPage setState(String value){
+        stateComponent.setState(value);
+        return this;
+    }
+
+    public RegistrationPage setCity(String value){
+        cityComponent.setCity(value);
+        return this;
+    }
+
+    public RegistrationPage submit(){
+        submitClick.scrollIntoView(true);
+        submitClick.click();
+        return this;
+    }
+
+
+    public RegistrationPage checkFormControl(){
+        $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
+        return this;
+    }
+
+
+
+
+
     public RegistrationPage checkResult(String key, String value) {
     $(".table-responsive").$(byText(key)).parent()
             .shouldHave(text(value));
+
+        return this;
 
     }
 

@@ -23,33 +23,56 @@ public class RegistrationWithPageObjectTests extends TestBase  {
                             .setEmail("egorov@test.ru")
                             .setGender("Other")
                             .setUserNumber("1234567890")
-                            .setDateOfBirth("30", "July", "1998");
+                            .setDateOfBirth("30", "July", "1998")
+                            .setSubjects("Math")
+                            .setHobbies("Sports")
+                            .uploadPicture("img/1.png")
+                            .setCurrentAddress("Some address 1")
+                            .setState("NCR")
+                            .setCity("Delhi")
 
+                            .submit();
 
+                   /*
+                   .checkResult("Student Name", "Jensen Huang")
+                   .checkResult("Student Email", "test@mail.com")
+                   .checkResult("Gender", "Male")
+                   .checkResult("Mobile", "1111111111")
+                   .checkResult("Date of Birth", "30 May,1970")
+                   .checkResult("Subjects", "Physics, Computer Science")
+                   .checkResult("Hobbies", "Reading, Music")
+                   .checkResult("Picture", "selenide-logo-big.png")
+                   .checkResult("Address", "Groove street 1")
+                   .checkResult("State and City", "Haryana Panipat");
+                   */
 
-
-            $("#dateOfBirthInput").click();
-            $(".react-datepicker__month-select").selectOption("July");
-            $(".react-datepicker__year-select").selectOption("1998");
-            $(".react-datepicker__day--030:not(.react-datepicker__day--030 react-datepicker__day--outside-month)").click();
-            $("#subjectsInput").setValue("Math").pressEnter();
-            $("#hobbiesWrapper").$(byText("Sports")).click();
-            $("#uploadPicture").uploadFromClasspath("img/1.png");
-            $("#currentAddress").setValue("Some address 1");
-            $("#state").click();
-            $("#stateCity-wrapper").$(byText("NCR")).click();
-            $("#city").click();
-            $("#stateCity-wrapper").$(byText("Delhi")).click();
-            $("#submit").click();
-
-
-            $(".modal-dialog").should(appear);
-            $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
-            $(".table-responsive").shouldHave(text("Alex"), text("Egorov"), text("egorov@test.ru"), text("1234567890"));
 
             registrationPage.checkResult("Student Name", "Alex Egorov")
                             .checkResult("Student Email", "egorov@test.ru");
 
         }
+
+   @Test
+   void RegistrationRequiredFieldsTest(){
+      registrationPage.openPage()
+              .setFirstName("Ada")
+              .setLastName("Lovelace")
+              .setGender("Female")
+              .setUserNumber("7999999999")
+              .submit()
+              .checkResult("Student Name", "Ada Lovelace")
+              .checkResult("Gender", "Female")
+              .checkResult("Mobile", "7999999999");
+   }
+
+  /* @Test
+   void emptyRegistrationFormTest(){
+      registrationPage.openPage()
+              .submit()
+              .checkValidation();
+   }
+
+   */
 }
+
 
