@@ -12,7 +12,7 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class RegistrationPage {
 
-    private SelenideElement firstNameInput = $("#firstName"),
+    public SelenideElement firstNameInput = $("#firstName"),
 
     lastNameInput = $("#lastName"),
     useEmailInput = $("#userEmail"),
@@ -127,8 +127,6 @@ public class RegistrationPage {
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
         return this;
     }
-
-
 
 
 
