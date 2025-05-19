@@ -12,10 +12,16 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 
-public class RegistratinTest extends TestBase  {
+public class RegistratinTest  {
 
-  beforeAll();
+    @BeforeAll
+    static void beforeAll( ) {
+        Configuration.browserSize = "1920x1080";
+        Configuration.baseUrl = "https://demoqa.com";
+        Configuration.pageLoadStrategy = "eager";
+        Configuration.timeout = 5000;
 
+    }
 
 
         @Test
